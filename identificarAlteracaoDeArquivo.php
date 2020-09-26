@@ -9,37 +9,46 @@ class identificarAlteracaoDeArquivo {
     
     public function nome()
     {
-        $dir = 'img/';
-        $arquivos; // recebe um array com os arquivos existentes.
+        $dir1 = $_POST['inputArquivoA'];
+        $dir2 = $_POST['inputArquivoB'];
+        $arquivoA; // recebe um array com os arquivos existentes.
         $conteudoArquivo; // recebe um array de conteúdo de um arquivo.
-        $ArquivosAntigos = array("ConnectWare.png", "IMG_20200712_111514.jpg");
         
 
-        if (!file_exists($dir)) {
-            echo "O arquivo ou diretório " . $dir . " não existem!";
-            
-        } else {
+        if (!file_exists($dir1)) {
+            echo "<h1> O arquivo ou diretório principal " . $dir1 . " não existem!</h1>";
+        } 
 
-            $arquivos = scandir($dir);
-            
-            // armazena o nome dos arquivos no diretório
-            foreach ($arquivos as $key => $value) {
-                if ($value != ".." && $value != ".") {
-                    $ArquivosNovos[] = $value;
-                }
-            }
+        if (!file_exists($dir2)) {
+            echo "<h1>O arquivo ou diretório de checagem " . $dir2 . " não existem!</h1>";
+        } 
 
-            // identifica se os arquivos são semelhantes
-            $result = array_diff($ArquivosNovos, $ArquivosAntigos);
+        $arquivoA = scandir($dir1);
+        $arquivoB = scandir($dir2);
 
-            // imprime arquivos que são diferentes
-            foreach ($result as $key => $value) {
-                echo "$value<br>";
+        // armazena o nome dos arquivos no diretório
+        foreach ($arquivoA as $key => $value) {
+            echo "Arquivo $key = $value <br>";
+            if ($value != ".." && $value != ".") {
+                $ArquivosNovos[] = $value;
             }
         }
+        ?>
+            <hr>
+        <?php
+
+        // identifica se os arquivos são semelhantes
+        $result = array_diff($arquivoA, $arquivoB);
+
+        // imprime arquivos que são diferentes
+        echo "<h1>Estes são os arquivos diferentes</h1>";
+        foreach ($result as $key => $value) {
+            echo "Arquivo $key = $value<br>";
+        }
+        
 
     }
-
+ 
 }
 
 $instanciando = new identificarAlteracaoDeArquivo();
