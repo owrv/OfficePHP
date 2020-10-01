@@ -27,6 +27,7 @@ class manipulaArquivo{
         $data = file($_POST['inputArquivoA']);
         $destino = $_POST['inputDestino'];
         $maximoPorArquivo = $_POST['inputMaximoPorArquivo'];
+        $maximoPorArquivo = $maximoPorArquivo + 1;
         $nomeDoArquivo = $_POST['inputNomeArquivo'];
         $contagemValorTotalLinhasData = count($data);
         $arrayParticionado = array_chunk($data, $maximoPorArquivo);
